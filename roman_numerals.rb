@@ -45,23 +45,73 @@
 
 def romanNumerator(romanString)
   charArray = romanString.chars
-  pp "char array = #{charArray}"
-
+  romanSum = 0
 
   charArray.each_with_index do |char, index|
+
     nextChar = charArray[index + 1]
-    charCombo = charArray.concat[index,index+1].join
+    charCombo = []
+    charCombo << charArray[index]
+    charCombo << charArray[index+1]
+    charCombo = charCombo.join.upcase
 
-    pp "index = #{index}"
-    pp "current char = #{char}"
-    pp "next char = #{nextChar}"
-    pp "char combo = #{charCombo}"
 
+    if charCombo == "IV" || charCombo == "IX" || charCombo == "XL" || charCombo == "XC" || charCombo == "CD" || charCombo == "CM"
+      if charCombo == "IV"
+        romanSum += 4
+        charArray[index+1] = 0
+      elsif charCombo == "IX"
+        romanSum += 9
+        charArray[index+1] = 0
+      elsif charCombo == "XL"
+        romanSum += 40
+        charArray[index+1] = 0
+      elsif charCombo == "XC"
+        romanSum += 90
+        charArray[index+1] = 0
+      elsif charCombo == "CD"
+        romanSum += 400
+        charArray[index+1] = 0
+      elsif charCombo == "CM"
+        romanSum += 900
+        charArray[index+1] = 0
+      end
+    elsif char == "I"
+      romanSum += 1
+    elsif char == "V"
+      romanSum += 5
+    elsif char == "X"
+      romanSum += 10
+    elsif char == "L"
+      romanSum += 50
+    elsif char == "C"
+      romanSum += 100
+    elsif char == "D"
+      romanSum += 500
+    elsif char == "M"
+      romanSum += 1000
+    end
   end
+
+  return romanSum
+
 end
 
-x = "string"
-romanNumerator(x)
+test1 = "MCMLXXXIV"
+pp "MCMLXXXIV = #{romanNumerator(test1)}"
+
+test2 = "MCMXCIV"
+pp "MCMXCIV = #{romanNumerator(test2)}"
+
+test3 = "MMXIX"
+pp "MMXIX = #{romanNumerator(test3)}"
+
+test4 = "MCMLXXXIX"
+pp "MCMLXXXIX = #{romanNumerator(test4)}"
+
+
+
+
 
 
 # Go through each letter and determine if it has the valid chatacters
