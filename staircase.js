@@ -11,7 +11,9 @@
 
 function staircase(n) {
   var step = 0
+  , space = n
   , stairs = "";
+
   while (step < n) {
     if (step === n - 1) {
       step++;
@@ -19,7 +21,8 @@ function staircase(n) {
     }
     else {
       step++;
-      stairs = stairs.concat("#".repeat(step)).concat("\n");
+      space--;
+      stairs = stairs.concat(" ".repeat(space)).concat("#".repeat(step)).concat("\n");
     }
   }
   return stairs;
